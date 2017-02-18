@@ -1,0 +1,35 @@
+task:
+  version: 1.0
+  appName: Task eEneme    
+  
+spring:
+  profiles:
+    active: production 
+---
+spring:
+  profiles: development
+  jpa:
+    database: h2
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+---
+spring:
+  profiles: production
+  datasource:
+    platform: mysql
+    url: jdbc:mysql://misketdb.cf2rizszpvwg.us-east-1.rds.amazonaws.com:3306/misketdb?useSSL=false
+    username: dogan
+    password: ali108Base
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  output:
+    ansi:
+      enabled: detect
+endpoints:
+  hypermedia:
+    enabled: true
