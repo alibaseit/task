@@ -1,7 +1,5 @@
 package com.dogan.service;
 
-import java.time.Instant;
-import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -24,16 +22,13 @@ public class TaskService {
 	}
 
 	public Task save(Task task) {
-		if (task.getDateCreated() == null)
-			task.setDateCreated(Date.from(Instant.now()));
-		if (taskRepository.exists(task.getId()))
-			return taskRepository.save(task);
-		else
-			return taskRepository.save(task);
+		return taskRepository.save(task);
 	}
 
-	public void delete(long id) {
+	public Task delete(long id) {
+		Task task = taskRepository.findOne(id);
 		taskRepository.delete(id);
+		return task;
 	}
 
 	public List<Task> allCompletedTasks() {

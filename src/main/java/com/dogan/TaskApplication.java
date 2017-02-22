@@ -1,7 +1,6 @@
 package com.dogan;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,8 +14,13 @@ import com.dogan.model.LoginAccount;
 
 @SpringBootApplication
 public class TaskApplication {
-	@Autowired
+	
 	private AppConfProperties appConfProperties;
+	
+	@Autowired
+	public void setAppConfProperties(AppConfProperties appConfProperties) {
+		this.appConfProperties = appConfProperties;
+	}
 
 	public static void main(String[] args) {
 		// System.setProperty("spring.devtools.restart.enabled", "false");
@@ -24,7 +28,7 @@ public class TaskApplication {
 		// SpringApplicationBuilder(TaskApplication.class).web(true).run(args);
 		// SpringApplication.run(TaskApplication.class, args);
 		SpringApplication app = new SpringApplication(TaskApplication.class);
-		app.setBannerMode(Banner.Mode.OFF);
+		//app.setBannerMode(Banner.Mode.OFF);
 		app.run(args);
 	}
 

@@ -1,9 +1,7 @@
 package com.dogan.model;
 
-import java.time.Instant;
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,43 +9,27 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity(name = "t_tasks")
+@DynamicUpdate
 public class Task {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	private String name;
-	
-	@Column(name="aciklama")
-	private String description;
-	
-	@Temporal(TemporalType.TIME)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy HH:mm")
-	private Date dateCreated;
-	private boolean finished;
 
-	public Task() {
-		
-	}
+	private String description;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy HH:mm")
+	//@JsonSerialize(using = DateSerializer.class)
+	private Date dateCreated;
 	
-	public Task(String name, String description) {
-		super();
-		this.name = name;
-		this.description = description;
-		this.dateCreated = Date.from(Instant.now());
-		this.finished = false;
-	}
-	
-	public Task(String name, String description, Date dateCreated, boolean finished) {
-		super();
-		this.name = name;
-		this.description = description;
-		this.dateCreated = dateCreated;
-		this.finished = finished;
-	}
+	private boolean finished;
 
 	public long getId() {
 		return id;
@@ -73,7 +55,7 @@ public class Task {
 		this.description = description;
 	}
 
-	public Date getDateCreated() {
+	public Date getDateCreated() {;
 		return dateCreated;
 	}
 

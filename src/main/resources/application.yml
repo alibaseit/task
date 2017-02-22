@@ -5,9 +5,14 @@ task:
 spring:
   profiles:
     active: production 
+
 ---
 spring:
   profiles: development
+  jackson:
+    date-format: dd.MM.yyyy HH:mm
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
   jpa:
     database: h2
     show-sql: true
